@@ -1,26 +1,40 @@
-const canvas = document.getElementById('lines');
-const ctx = canvas.getContext("2d");
-ctx.lineWidth = 4;
-
 // center and radius of drawing area
-const board = new Board(
-    {x: canvas.width / 2, y: canvas.height / 2},
-    canvas.height / 2 - 10
-)
+const board = new Board();
 
 const bg = new Background();
 bg.drawOutline(board.center, board.radius);
 
-disc = new Disc(board, 150, 'yellow');
+disc = new Disc(board, 150, 'orange');
+
+document.addEventListener('mousedown', function(evt) {
+    if (board.state === 'placing') {
+        board.state = 'drawing';
+
+        const mouse = board.getMousePosition(evt);
+        disc.selectHandle(mouse);
+    }
+});
+
+document.addEventListener('mouseup', function(evt) {
+    if (board.state === 'drawing') {
+        board.state = 'placing';
+    }
+});
 
 document.addEventListener('mousemove', function(evt) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.beginPath();
+    const mouse = board.getMousePosition(evt);
+    let angle = board.getAngleAtMouse(mouse);
 
-    const mouse = board.getMousePosition(canvas, evt);
-    const angle = board.getAngleToPosition(mouse);
-    board.drawRadiusAtAngle(ctx, angle);
+    if (board.state === 'placing') {
+        // snap angle to 90 degrees
+        const quarterCircle = Math.PI / 2;
+        angle = Math.round(angle / quarterCircle) * quarterCircle;
+        disc.drawDisc(angle);
+    } else {
+        disc.drawRotation(angle);
+    }
 
-    // draw disc inside the outer circle touching the outer circle at intersection
-    disc.drawDisc(angle);
+
+    // For debugging
+    // board.drawRadiusAtAngle(angle);
 });

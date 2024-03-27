@@ -9,7 +9,9 @@ class Background {
         this.ctx.lineWidth = 4
         this.ctx.beginPath();
         this.ctx.arc(center.x, center.y, radius, 0, 2 * Math.PI);
-        this.ctx.strokeStyle = '#aaa'
-        this.ctx.stroke();
+        this.ctx.fillStyle = 'black'
+        this.ctx.shadowBlur = 20;
+        this.ctx.shadowColor = '#aaa';
+        this.ctx.fill();
     }
 }
