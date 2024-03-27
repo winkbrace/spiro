@@ -2,10 +2,13 @@ body {
     height: 100vh;
     margin: 0;
     background: linear-gradient(to bottom, #222, black);
+    color: white;
+    font-family: Verdana, sans-serif;
 }
 
-main {
+header, main, footer {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
@@ -16,4 +19,8 @@ canvas {
     height: 800px;
     position: absolute;
     top: 0;
+}
+
+ul > li {
+    line-height: 1.5rem;
 }

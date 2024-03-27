@@ -1,6 +1,4 @@
 class Background {
-    ctx;
-
     constructor() {
         const canvas = document.getElementById('background');
         this.ctx = canvas.getContext("2d");

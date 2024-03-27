@@ -2,18 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Gonio</title>
+    <title>Spiro</title>
 
     <link rel="stylesheet" href="style.css">
-    <script defer src="background.js"></script>
-    <script defer src="disc.js"></script>
+    <script defer src="Board.js"></script>
+    <script defer src="Background.js"></script>
+    <script defer src="Disc.js"></script>
     <script defer src="script.js"></script>
 </head>
 <body>
+    <header>
+        <h1>Spiro</h1>
+    </header>
+
     <main>
         <canvas id="background" width="800" height="800"></canvas>
         <canvas id="disc" width="800" height="800"></canvas>
         <canvas id="lines" width="800" height="800"></canvas>
     </main>
+
+    <footer>
+        <h2>TODO</h2>
+        <ul>
+            <li>Add holes in disc</li>
+            <li>Rotate disc when moving mouse</li>
+            <li>Draw line with shadowBlur and shadowColor from selected hole</li>
+            <li>Snap disc to 90 degrees when mouse not pressed</li>
+            <li>On mouse down draw line</li>
+            <li>Add discs to (un)select</li>
+            <li>Add color picker for lines</li>
+            <li>Make the lines hide/show</li>
+        </ul>
+    </footer>
 </body>
 </html>
