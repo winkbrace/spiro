@@ -1,0 +1,19 @@
+body {
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(to bottom, #222, black);
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+canvas {
+    width: 800px;
+    height: 800px;
+    position: absolute;
+    top: 0;
+}
