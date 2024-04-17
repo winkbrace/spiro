@@ -2,17 +2,22 @@ class Disc {
     handles;
     selectedHandle;
     handleRadius = 5;
+    visible = true;
 
-    constructor(board, radius, color) {
+    prevAngle = 0;
+    currentRotation = 0;
+
+    constructor(board, size, color) {
         this.board = board;
-        this.radius = radius;
+        this.radius = board.radius * size / 20;
         this.color = color;
         this.canvas = document.getElementById('disc');
         this.ctx = this.canvas.getContext("2d");
     }
 
-    setRadius(radius) {
-        this.radius = radius;
+    setSize(size) {
+        // ensure the radius is a factor of the board radius. This determines the amount of tops.
+        this.radius = board.radius * size / 20;
     }
 
     selectHandle(position) {
@@ -52,6 +57,10 @@ class Disc {
     }
 
     drawDisc(angle) {
+        if (! this.visible) {
+            return;
+        }
+
         const center = this.findCenter(angle);
 
         this.resetCanvas();
@@ -61,16 +70,28 @@ class Disc {
         this.ctx.fill();
         this.ctx.globalAlpha = 1;
 
+        let handleAngle = angle;
         if (this.board.state !== 'placing') {
+            handleAngle -= this.currentRotation * 2 * Math.PI;
+
             // Both circumferences are calculated with 2*PI*r, so the constant 2*PI can be omitted.
             const rotations = (this.board.radius / this.radius);
-            angle *= -2 * rotations / Math.PI;
-        } else {
-            console.log(this.board.radius, this.radius, this.board.radius / this.radius);
+            handleAngle *= -2 * rotations / Math.PI; // rotation speed of the disc
+
+            // track the currentRotation by checking when we swap pos/neg sign (at the west position)
+            // We use value 2, although it swaps sign at PI. When you move quickly the angle can still be far away.
+            // We don't want to check at 0, because that's at the wrong side of the board.
+            if (this.prevAngle < -2 && angle > 2) {
+                this.currentRotation++;
+            } else if (this.prevAngle > 2 && angle < -2) {
+                this.currentRotation--;
+            }
+
+            this.prevAngle = angle;
         }
 
-        this.createHandles(center, angle);
-        this.drawHandles(center, angle);
+        this.createHandles(center, handleAngle);
+        this.drawHandles(center, handleAngle);
     }
 
     findCenter(angle) {
@@ -83,7 +104,8 @@ class Disc {
     /**
      * The spiral goes loops times round the disc
      */
-    createHandles(center, angle, loops = 2.5) {
+    createHandles(center, angle) {
+        const loops = 2.5;
         let x, y, ratio;
         let a = 0;
         let stepSize = 0.1;
@@ -138,8 +160,9 @@ class Disc {
         this.ctx.beginPath();
     }
 
-    toggleVisibility(show) {
-        if (show)
+    toggleVisibility(visible) {
+        this.visible = visible;
+        if (this.visible)
             this.drawDisc(0);
         else
             this.resetCanvas();

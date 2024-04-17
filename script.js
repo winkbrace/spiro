@@ -4,7 +4,7 @@ const board = new Board();
 const bg = new Background();
 bg.drawOutline(board.center, board.radius);
 
-disc = new Disc(board, 150, 'orange');
+disc = new Disc(board, 10, 'orange');
 lines = new Lines(4, '#00ffff');
 
 function outOfBounds(mouse) {
@@ -38,9 +38,6 @@ document.addEventListener('mousemove', function(evt) {
     let angle = board.getAngleAtMouse(mouse);
 
     if (board.state === 'placing') {
-        // snap angle to 90 degrees
-        // const quarterCircle = Math.PI / 2;
-        // angle = Math.round(angle / quarterCircle) * quarterCircle;
         angle = 0;
     }
     disc.drawDisc(angle);
@@ -57,7 +54,7 @@ colorInput.addEventListener('change', function(event) {
 
 const discSizeInput = document.querySelector('#disc-size');
 discSizeInput.addEventListener('change', function(event) {
-    disc.setRadius(event.target.value * 15);
+    disc.setSize(event.target.value);
     disc.drawDisc(0);
 });
 

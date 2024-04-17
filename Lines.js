@@ -7,7 +7,7 @@ class Lines {
         this.ctx.shadowBlur = 10;
         this.ctx.shadowColor = 'blue';
 
-        this.prevHandle = null;
+        this.stop();
     }
 
     setColor(color) {
@@ -25,13 +25,12 @@ class Lines {
     }
 
     drawTo(handle) {
-        if (! this.prevHandle) {
-            this.prevHandle = handle;
+        if (board.state === 'placing') {
             return;
         }
 
-        if (board.state === 'placing') {
-            this.stop();
+        if (! this.prevHandle) {
+            this.prevHandle = handle;
             return;
         }
 
