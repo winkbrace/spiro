@@ -1,12 +1,45 @@
 class Lines {
-    constructor(width) {
-        const canvas = document.getElementById('lines');
-        const ctx = canvas.getContext("2d");
-        ctx.lineWidth = width;
+    constructor(width, color) {
+        this.canvas = document.getElementById('lines');
+        this.ctx = this.canvas.getContext("2d");
+        this.ctx.lineWidth = width;
+        this.ctx.strokeStyle = color;
+        this.ctx.shadowBlur = 10;
+        this.ctx.shadowColor = 'blue';
+
+        this.prevHandle = null;
     }
 
-    draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.beginPath();
+    setColor(color) {
+        this.ctx.strokeStyle = color;
+    }
+
+    clear() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.stop();
+    }
+
+    stop() {
+        this.prevHandle = null;
+        this.ctx.beginPath();
+    }
+
+    drawTo(handle) {
+        if (! this.prevHandle) {
+            this.prevHandle = handle;
+            return;
+        }
+
+        if (board.state === 'placing') {
+            this.stop();
+            return;
+        }
+
+        this.ctx.beginPath();
+        this.ctx.moveTo(this.prevHandle.x, this.prevHandle.y)
+        this.ctx.lineTo(handle.x, handle.y)
+        this.ctx.stroke();
+
+        this.prevHandle = handle;
     }
 }

@@ -8,6 +8,7 @@
     <script defer src="Board.js"></script>
     <script defer src="Background.js"></script>
     <script defer src="Disc.js"></script>
+    <script defer src="Lines.js"></script>
     <script defer src="script.js"></script>
 </head>
 <body>
@@ -16,24 +17,29 @@
     </header>
 
     <main>
-        <canvas id="background" width="800" height="800"></canvas>
-        <canvas id="lines" width="800" height="800"></canvas>
-        <canvas id="disc" width="800" height="800"></canvas>
+        <div class="canvas-container">
+            <canvas id="background" width="800" height="800"></canvas>
+            <canvas id="lines" width="800" height="800"></canvas>
+            <canvas id="disc" width="800" height="800"></canvas>
+        </div>
+        <div class="options">
+            <label for="line-color">
+                Kleur
+                <input type="color" id="line-color" value="#00ffff">
+            </label>
+            <label for="disc-size">
+                Schijf
+                <input type="range" id="disc-size" min="5" max="10" value="10">
+            </label>
+            <label for="reset-button">
+                Nieuw
+                <button id="reset-button">🎨</button>
+            </label>
+        </div>
     </main>
 
     <footer>
-        <h2>TODO</h2>
-        <ul>
-            <li>Add holes in disc</li>
-            <li>Rotate disc when moving mouse</li>
-            <li>Draw line with shadowBlur and shadowColor from selected hole</li>
-            <li>Snap disc to 90 degrees when mouse not pressed</li>
-            <li>On mouse down draw line</li>
-            <li>Add discs to (un)select</li>
-            <li>Add color picker for lines</li>
-            <li>Make the lines hide/show</li>
-            <li>Increase/decrease glow</li>
-        </ul>
+        <p>Made by Bas de Ruiter - 2024</p>
     </footer>
 </body>
 </html>

@@ -5,19 +5,31 @@ const bg = new Background();
 bg.drawOutline(board.center, board.radius);
 
 disc = new Disc(board, 150, 'orange');
+lines = new Lines(4, '#00ffff');
+
+function outOfBounds(mouse) {
+    return mouse.x > board.canvas.width
+        || mouse.y > board.canvas.height
+        || mouse.x < 0
+        || mouse.y < 0;
+}
 
 document.addEventListener('mousedown', function(evt) {
     if (board.state === 'placing') {
         board.state = 'drawing';
 
         const mouse = board.getMousePosition(evt);
-        disc.selectHandle(mouse);
+
+        if (! outOfBounds(mouse)) {
+            disc.selectHandle(mouse);
+        }
     }
 });
 
 document.addEventListener('mouseup', function(evt) {
     if (board.state === 'drawing') {
         board.state = 'placing';
+        lines.stop();
     }
 });
 
@@ -27,14 +39,29 @@ document.addEventListener('mousemove', function(evt) {
 
     if (board.state === 'placing') {
         // snap angle to 90 degrees
-        const quarterCircle = Math.PI / 2;
-        angle = Math.round(angle / quarterCircle) * quarterCircle;
-        disc.drawDisc(angle);
-    } else {
-        disc.drawRotation(angle);
+        // const quarterCircle = Math.PI / 2;
+        // angle = Math.round(angle / quarterCircle) * quarterCircle;
+        angle = 0;
     }
-
+    disc.drawDisc(angle);
 
     // For debugging
     // board.drawRadiusAtAngle(angle);
+});
+
+const colorInput = document.querySelector('#line-color');
+colorInput.addEventListener('change', function(event) {
+    lines.setColor(event.target.value);
+    lines.stop();
+});
+
+const discSizeInput = document.querySelector('#disc-size');
+discSizeInput.addEventListener('change', function(event) {
+    disc.setRadius(event.target.value * 15);
+    disc.drawDisc(0);
+});
+
+const resetButton = document.querySelector('#reset-button');
+resetButton.addEventListener('click', function(event) {
+    lines.clear();
 });

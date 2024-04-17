@@ -6,16 +6,60 @@ body {
     font-family: Verdana, sans-serif;
 }
 
-header, main, footer {
+header, main, footer, .options {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
 }
 
 main {
     height: 800px;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.canvas-container {
+    position: relative;
+    width: 800px;
+    height: 800px;
+}
+
+.options {
+    padding: 1rem;
+    align-items: baseline;
+    gap: 1rem;
+
+    label {
+        width: 12rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    input, button {
+        width: 8rem;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+button {
+    background-color: royalblue;
+    border: none;
+    color: white;
+    padding: 0.1rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.5rem;
+
+    &:hover {
+        background-color: dodgerblue;
+        cursor: pointer;
+    }
 }
 
 canvas {
