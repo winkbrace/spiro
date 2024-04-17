@@ -65,3 +65,8 @@ const resetButton = document.querySelector('#reset-button');
 resetButton.addEventListener('click', function(event) {
     lines.clear();
 });
+
+const showDiskToggle = document.querySelector('#show-disc');
+showDiskToggle.addEventListener('change', function(event) {
+    disc.toggleVisibility(event.target.checked);
+});

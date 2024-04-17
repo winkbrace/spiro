@@ -5,6 +5,8 @@
     <title>Spiro</title>
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="toggle.css">
+
     <script defer src="Board.js"></script>
     <script defer src="Background.js"></script>
     <script defer src="Disc.js"></script>
@@ -29,7 +31,14 @@
             </label>
             <label for="disc-size">
                 Schijf
-                <input type="range" id="disc-size" min="5" max="10" value="10">
+                <input type="range" id="disc-size" min="5" max="20" value="10">
+            </label>
+            <label for="show-disc">
+                Toon
+                <span class="switch">
+                    <input type="checkbox" id="show-disc" checked>
+                    <span class="slider round"></span>
+                </span>
             </label>
             <label for="reset-button">
                 Nieuw

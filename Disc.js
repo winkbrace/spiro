@@ -137,4 +137,11 @@ class Disc {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.beginPath();
     }
+
+    toggleVisibility(show) {
+        if (show)
+            this.drawDisc(0);
+        else
+            this.resetCanvas();
+    }
 }
