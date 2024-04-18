@@ -14,15 +14,15 @@
     <script defer src="script.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Spiro</h1>
-    </header>
-
     <main>
-        <div class="canvas-container">
-            <canvas id="background" width="800" height="800"></canvas>
-            <canvas id="lines" width="800" height="800"></canvas>
-            <canvas id="disc" width="800" height="800"></canvas>
+        <div class="content">
+            <h1>Spiro</h1>
+            <div class="canvas-container">
+                <canvas id="background" width="800" height="800"></canvas>
+                <canvas id="lines" width="800" height="800"></canvas>
+                <canvas id="disc" width="800" height="800"></canvas>
+            </div>
+            <p>Made by Bas de Ruiter - 2024</p>
         </div>
         <div class="options">
             <label for="line-color">
@@ -31,7 +31,7 @@
             </label>
             <label for="disc-size">
                 Schijf
-                <input type="range" id="disc-size" min="5" max="20" value="10">
+                <input type="range" id="disc-size" min="6" max="20" value="12" step="2">
             </label>
             <label for="show-disc">
                 Toon
@@ -46,9 +46,5 @@
             </label>
         </div>
     </main>
-
-    <footer>
-        <p>Made by Bas de Ruiter - 2024</p>
-    </footer>
 </body>
 </html>

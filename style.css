@@ -6,7 +6,7 @@ body {
     font-family: Verdana, sans-serif;
 }
 
-header, main, footer, .options {
+main, .content, .options {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -14,7 +14,6 @@ header, main, footer, .options {
 }
 
 main {
-    height: 800px;
     flex-direction: row;
     gap: 1rem;
 }

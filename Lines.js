@@ -24,12 +24,22 @@ class Lines {
         this.ctx.beginPath();
     }
 
-    drawTo(handle) {
+    /**
+     * @param handle
+     * @param dontGlitch Around PI the calculation glitches, so only draw shorter lines around that point.
+     */
+    drawTo(handle, dontGlitch) {
         if (board.state === 'placing') {
             return;
         }
 
         if (! this.prevHandle) {
+            this.prevHandle = handle;
+            return;
+        }
+
+        // Only draw when new point is near previous point.
+        if (dontGlitch && (Math.abs(this.prevHandle.x - handle.x) > 20 || Math.abs(this.prevHandle.y - handle.y) > 20)) {
             this.prevHandle = handle;
             return;
         }

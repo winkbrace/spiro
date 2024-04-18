@@ -1,4 +1,7 @@
 class Disc {
+    board;
+    radius;
+    color;
     handles;
     selectedHandle;
     handleRadius = 5;
@@ -9,7 +12,7 @@ class Disc {
 
     constructor(board, size, color) {
         this.board = board;
-        this.radius = board.radius * size / 20;
+        this.setSize(size);
         this.color = color;
         this.canvas = document.getElementById('disc');
         this.ctx = this.canvas.getContext("2d");
@@ -17,7 +20,7 @@ class Disc {
 
     setSize(size) {
         // ensure the radius is a factor of the board radius. This determines the amount of tops.
-        this.radius = board.radius * size / 20;
+        this.radius = board.radius * size / 24;
     }
 
     selectHandle(position) {
@@ -34,10 +37,10 @@ class Disc {
             }
         }
 
-        this.drawSelectedHandle();
+        this.drawSelectedHandle(false);
     }
 
-    drawSelectedHandle() {
+    drawSelectedHandle(dontGlitch) {
         if (typeof(this.selectedHandle) === 'undefined') {
             return;
         }
@@ -53,7 +56,7 @@ class Disc {
         this.ctx.fillStyle = 'white';
         this.ctx.fill();
 
-        lines.drawTo(handle);
+        lines.drawTo(handle, dontGlitch);
     }
 
     drawDisc(angle) {
@@ -90,8 +93,11 @@ class Disc {
             this.prevAngle = angle;
         }
 
+        // Around PI the calculation glitches, so only draw shorter lines around that point.
+        const dontGlitch = Math.abs(angle) > 3;
+
         this.createHandles(center, handleAngle);
-        this.drawHandles(center, handleAngle);
+        this.drawHandles(dontGlitch);
     }
 
     findCenter(angle) {
@@ -136,7 +142,7 @@ class Disc {
         // this.ctx.stroke();
     }
 
-    drawHandles() {
+    drawHandles(dontGlitch) {
         for (let handle of this.handles) {
             // console.log(handle);
             this.ctx.beginPath();
@@ -145,7 +151,7 @@ class Disc {
             this.ctx.fill();
         }
 
-        this.drawSelectedHandle();
+        this.drawSelectedHandle(dontGlitch);
     }
 
     distanceFromCenter(center, pos) {

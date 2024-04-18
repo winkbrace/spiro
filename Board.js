@@ -3,7 +3,7 @@ class Board {
 
     constructor() {
         this.canvas = document.getElementById('disc');
-        const margin = 10;
+        const margin = 16;
         this.ctx = this.canvas.getContext("2d");
         this.center = {x: this.canvas.width / 2, y: this.canvas.height / 2};
         this.radius = this.canvas.height / 2 - margin;
