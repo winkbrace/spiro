@@ -23,6 +23,10 @@ class Disc {
         this.radius = board.radius * size / 24;
     }
 
+    resetCurrentRotation() {
+        this.currentRotation = 0;
+    }
+
     selectHandle(position) {
         // find handle closest to position
         const distances = this.handles.map((handle) => {

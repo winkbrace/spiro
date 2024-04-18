@@ -30,6 +30,7 @@ document.addEventListener('mouseup', function(evt) {
     if (board.state === 'drawing') {
         board.state = 'placing';
         lines.stop();
+        disc.resetCurrentRotation();
     }
 });
 
